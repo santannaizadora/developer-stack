@@ -1,6 +1,6 @@
 import Joi from "joi";
 import { CreateAnswerData } from "../services/answerService.js";
 
-export const answerSchema = Joi.object<typeof CreateAnswerData>({
+export const answerSchema = Joi.object<CreateAnswerData>({
   answer: Joi.string().required(),
 });

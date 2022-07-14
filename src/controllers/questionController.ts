@@ -9,13 +9,19 @@ export async function create(req: Request, res: Response) {
 }
 
 export async function answer(req: Request, res: Response) {
-  // TODO
+  const { answer } = req.body;
+  const { id } = req.params as any;
+  await answerService.createAnswer(answer, id);
+  res.sendStatus(201);
 }
 
 export async function get(req: Request, res: Response) {
-  // TODO
+  const questions = await questionService.findAll();
+  res.send(questions).status(200);
 }
 
 export async function getById(req: Request, res: Response) {
-  // TODO
+  const { id } = req.params as any;
+  const question = await questionService.findById(id);
+  res.send(question).status(200);
 }

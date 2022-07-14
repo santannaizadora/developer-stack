@@ -1,11 +1,14 @@
-// TODO
+import { Answers } from "@prisma/client";
+import {  answerRepository } from "../repositories/answerRepository.js";
 
-export const CreateAnswerData = (answer: string, question_id: number) => {
-    return {
-        answer,
-        question_id
-    }
+
+export type CreateAnswerData = Omit<Answers, 'id'>;
+
+const createAnswer= async (answer: string, questionId: number) => {
+    await answerRepository.insert({answer, questionId});
 }
 
-const answerService = {};
+const answerService = {
+    createAnswer,
+};
 export default answerService;

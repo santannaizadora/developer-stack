@@ -1,6 +1,6 @@
 import { prisma } from "../config/database.js"; 
 
-interface Question {
+export interface Question {
     id: number; 
     question: string;
 }
@@ -15,6 +15,23 @@ const insert = async (question: QuestionInsertData) => {
     });
 }
 
+const getAll = async () => {
+    return await prisma.questions.findMany();
+}
+
+const getById = async (id: number) => {
+    return await prisma.questions.findUnique({
+        where: {
+            id
+        },
+        include: {
+            answers: true
+        }
+    });
+}
+
 export const questionRepository = {
-    insert
+    insert,
+    getAll,
+    getById
 }
