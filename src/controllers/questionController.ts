@@ -10,8 +10,8 @@ export async function create(req: Request, res: Response) {
 
 export async function answer(req: Request, res: Response) {
   const { answer } = req.body;
-  const { id } = req.params as any;
-  await answerService.createAnswer(answer, id);
+  const { id } = req.params;
+  await answerService.createAnswer(answer, parseInt(id));
   res.sendStatus(201);
 }
 
@@ -21,7 +21,7 @@ export async function get(req: Request, res: Response) {
 }
 
 export async function getById(req: Request, res: Response) {
-  const { id } = req.params as any;
-  const question = await questionService.findById(id);
+  const { id } = req.params;
+  const question = await questionService.findById(parseInt(id));
   res.send(question).status(200);
 }

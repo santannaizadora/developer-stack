@@ -1,3 +1,4 @@
+import { parse } from "path";
 import { prisma } from "../config/database.js"; 
 
 export interface Question {
@@ -20,6 +21,7 @@ const getAll = async () => {
 }
 
 const getById = async (id: number) => {
+    console.log(typeof id);
     return await prisma.questions.findUnique({
         where: {
             id
